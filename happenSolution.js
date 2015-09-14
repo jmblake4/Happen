@@ -211,12 +211,17 @@ var library = (function() {
 						},
 						Ordinal: function(){
 							var dte = new Date();
+							var day_num = dte.getDate();
 							var str_day = dte.getDate().toString();
-							switch (str_day[str_day.length - 1]) {
-								case '1': return (str_day + 'st');
-								case '2': return (str_day + 'nd');
-								case '3': return (str_day + 'rd');
-								default: return (str_day + 'th');
+							if ((day_num > 9) && (str_day[str_day.length-2] == '1')) {
+								return (str_day + 'th');
+							} else {
+								switch (str_day[str_day.length - 1]) {
+									case '1': return (str_day + 'st');
+									case '2': return (str_day + 'nd');
+									case '3': return (str_day + 'rd');
+									default: return (str_day + 'th');
+								}
 							}
 						},
 						DateDblDigit: function(){
@@ -310,11 +315,15 @@ var library = (function() {
 							else bLeapYear = ((year % 100) != 0 || (year % 400) == 0);
 
 							if (month > 1 && bLeapYear) dayOfYear++;
-							switch(dayOfYear.toString()[dayOfYear.toString().length-1]) {
-								case '1': return dayOfYear.toString() + 'st';
-								case '2': return dayOfYear.toString() + 'nd';
-								case '3': return dayOfYear.toString() + 'rd';
-								default: return dayOfYear.toString() + 'th';
+							if ((dayOfYear > 9) && (dayOfYear.toString()[dayOfYear.toString().length-2] == '1')) {
+								return (dayOfYear + 'th');
+							} else {
+								switch(dayOfYear.toString()[dayOfYear.toString().length-1]) {
+									case '1': return dayOfYear.toString() + 'st';
+									case '2': return dayOfYear.toString() + 'nd';
+									case '3': return dayOfYear.toString() + 'rd';
+									default: return dayOfYear.toString() + 'th';
+								}
 							}
 						}
 					}
